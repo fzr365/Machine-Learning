@@ -1,12 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.metrics import adjusted_rand_score, silhouette_score
 
 
-
+# 设置中文字体
+rcParams['font.sans-serif'] = ['SimHei']  # 使用黑体
+rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 
 # 加载数据
 iris = load_iris()
@@ -184,14 +187,14 @@ def plot_clusters(title, labels):
     for label in unique_labels:
         if label == -1:  # 噪声点
             plt.scatter(X_pca[labels == label, 0], X_pca[labels == label, 1],
-                        c='black', marker='x', s=50, label='Noise')
+                        c='black', marker='x', s=50, label='噪声点')
         else:
             plt.scatter(X_pca[labels == label, 0], X_pca[labels == label, 1],
-                        label=f'Cluster {label}', alpha=0.7)
+                        label=f'聚类 {label}', alpha=0.7)
 
     plt.title(title)
-    plt.xlabel('PCA Component 1')
-    plt.ylabel('PCA Component 2')
+    plt.xlabel('PCA 组件 1')
+    plt.ylabel('PCA 组件 2')
     plt.legend()
     plt.show()
 
